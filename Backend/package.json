@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    
     "start": "node server.js",
-    "test": "echo \"No tests available\""
+    "test": "echo \"No tests available\"",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -19,5 +19,8 @@
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.2",
     "validator": "^13.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
   }
 }
