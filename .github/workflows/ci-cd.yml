@@ -41,6 +41,11 @@ jobs:
       run: |
         cd Backend
         docker build -t your-dockerhub-username/your-app-name:${{ github.sha }} .
+    
+    - name: Set up environment variables
+      run: |
+          echo "DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }}" >> $GITHUB_ENV
+          echo "DOCKER_HUB_PASSWORD=${{ secrets.DOCKER_HUB_PASSWORD }}" >> $GITHUB_ENV
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_PASSWORD}}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
