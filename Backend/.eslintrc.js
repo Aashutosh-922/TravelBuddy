@@ -21,6 +21,9 @@ module.exports = {
     "parserOptions": {
         "ecmaVersion": "latest"
     },
-    "rules": {
+    "rules": 
+    {
+          "no-undef": "off",
+          "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
     }
 }
