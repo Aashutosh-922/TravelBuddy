@@ -9,3 +9,4 @@ router.put('/:userId', verifyToken, updateUser);
 router.delete('/:userId', verifyToken, deleteUser);
 
 module.exports = router;
+//user
