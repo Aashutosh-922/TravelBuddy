@@ -1,3 +1,4 @@
+
 name: CI/CD Pipeline
 
 on:
@@ -21,17 +22,25 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
+    - name: Navigate to backend and install dependencies
+      run: |
+        cd travelbuddy/backend
+        npm install
 
     - name: Run tests
-      run: npm test
+      run: |
+        cd travelbuddy/backend
+        npm test
 
     - name: Lint code
-      run: npm run lint
+      run: |
+        cd travelbuddy/backend
+        npm run lint
 
     - name: Build Docker image
-      run: docker build -t your-dockerhub-username/your-app-name:${{ github.sha }} .
+      run: |
+        cd travelbuddy/backend
+        docker build -t your-dockerhub-username/your-app-name:${{ github.sha }} .
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
