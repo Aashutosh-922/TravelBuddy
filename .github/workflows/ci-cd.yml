@@ -48,7 +48,7 @@ jobs:
 
 
     - name: Push Docker image
-      run: docker push aashutoshkarale/travelbuddy:tagname:${{ github.sha }}
+      run: docker push ***/travelbuddy:tagname ${{ github.sha }}
       
 
   deploy:
