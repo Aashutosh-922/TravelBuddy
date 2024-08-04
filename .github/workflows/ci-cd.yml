@@ -48,7 +48,7 @@ jobs:
 
 
     - name: Push Docker image
-      run: docker push your-dockerhub-username/your-app-name:${{ github.sha }}
+      run: docker push aashutoshkarale/travelbuddy:tagname:${{ github.sha }}
       
 
   deploy:
@@ -64,7 +64,7 @@ jobs:
         username: ${{ secrets.PROD_SERVER_USER }}
         key: ${{ secrets.PROD_SERVER_SSH_KEY }}
         script: |
-          docker pull your-dockerhub-username/your-app-name:${{ github.sha }}
+          docker pull aashutoshkarale/travelbuddy:${{ github.sha }}
           docker stop app || true
           docker rm app || true
           docker run -d --name app -p 80:3000 your-dockerhub-username/your-app-name:${{ github.sha }}
