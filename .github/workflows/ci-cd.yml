@@ -37,16 +37,33 @@ jobs:
         cd Backend
         npm run lint
 
+    # - name: Build Docker image
+    #   run: |
+    #     cd Backend
+    #     docker build -t your-dockerhub-username/your-app-name:tagname-${{ github.sha }} .
+
+    # - name: Log in to Docker Hub
+    #   run: docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" -p "${{ secrets.DOCKER_HUB_PASSWORD }}"
+
+    # - name: Push Docker image
+    #   run: docker push your-dockerhub-username/your-app-name:tagname-${{ github.sha }}
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
     - name: Build Docker image
       run: |
-        cd Backend
-        docker build -t your-dockerhub-username/your-app-name:tagname-${{ github.sha }} .
+          cd Backend
+          sudo docker build -t your-dockerhub-username/your-app-name:tagname-${{ github.sha }} .
 
     - name: Log in to Docker Hub
-      run: docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" -p "${{ secrets.DOCKER_HUB_PASSWORD }}"
+      run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | sudo docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
     - name: Push Docker image
-      run: docker push your-dockerhub-username/your-app-name:tagname-${{ github.sha }}
+      run: sudo docker push your-dockerhub-username/your-app-name:tagname-${{ github.sha }}
+
+    - name: Logout from Docker Hub
+      run: sudo docker logout
 
 
   deploy:
